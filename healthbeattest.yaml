@@ -2,7 +2,7 @@
 - name: Install Healthbeat on Ubuntu servers
   hosts: all
   become: yes
-  become_user: ubuntu
+  become_user: vunet
   tasks:
     - name: Transfer installer tar file to /tmp
       copy:
@@ -17,11 +17,11 @@
 
     - name: Change directory to ./healthbeat
       become: yes
-      become_user: ubuntu
+      become_user: vunet
       shell: cd /opt/healthbeat
 
     - name: Run the install script
       become: yes
-      become_user: ubuntu
+      become_user: vunet
       shell: bash ./install --quick
 
