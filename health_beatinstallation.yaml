@@ -6,7 +6,7 @@
   tasks:
     - name: Transfer installer tar file to /tmp
       copy:
-        src: {{path}}
+        src: "{{path}}"
         dest: /tmp/installer.tar
 
     - name: Extract installer tar on /opt
