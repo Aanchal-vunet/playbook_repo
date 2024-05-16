@@ -9,6 +9,7 @@
       copy:
         src: "{{path}}"
         dest: "/tmp/installer.tar"
+        remote_src: yes
 
     - name: Extract installer tar on /opt
       unarchive:
