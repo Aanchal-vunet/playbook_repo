@@ -16,13 +16,13 @@
       become_user: vunet
       unarchive:
         src: "/tmp/installer.tar"
-        dest: "/home/vunet/"
+        dest: "/home/vunet/healthbeat_install"
         remote_src: yes
 
     - name: Change directory to ./healthbeat
       become: yes
       become_user: vunet
-      shell: "cd /home/vunet/healthbeat_install"
+      shell: "cd /home/vunet/healthbeat_install/healthbeat"
 
     - name: Run the install script
       become: yes
