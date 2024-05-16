@@ -11,6 +11,21 @@
         dest: "/tmp/installer.tar"
         remote_src: yes
 
+    - name: Set permissions for installer tar file
+      file:
+        path: "/tmp/installer.tar"
+        mode: "0644"
+        owner: vunet
+        group: vunet
+
+    - name: Set permissions for /opt directory
+      file:
+        path: "/opt"
+        state: directory
+        mode: "0755"
+        owner: vunet
+        group: vunet
+
     - name: Extract installer tar on /opt
       unarchive:
         src: "/tmp/installer.tar"
