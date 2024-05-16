@@ -5,6 +5,7 @@
   become_user: vunet
   tasks:
     - name: Transfer installer tar file to /tmp
+      become_user: vunet
       copy:
         src: "{{path}}"
         dest: "/tmp/installer.tar"
