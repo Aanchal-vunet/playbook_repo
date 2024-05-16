@@ -19,7 +19,7 @@
     - name: Change directory to ./healthbeat
       become: yes
       become_user: vunet
-      shell: "cd /opt/healthbeat"
+      shell: "cd /opt/healthbeat_linux_64_install"
 
     - name: Run the install script
       become: yes
