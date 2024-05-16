@@ -5,24 +5,13 @@
   become_user: vunet
   tasks:
     - name: Transfer installer tar file to /tmp
-      become_user: vunet
       copy:
-        src: "{{path}}"
+        src: "{{ path }}"
         dest: "/tmp/installer.tar"
         remote_src: yes
 
     - name: Extract installer tar on /opt
-      become: yes
-      become_user: vunet
-      shell: "sudo tar -xf /tmp/installer.tar -C /opt && sudo chown -R vunet:vunet /opt"
+      shell: "tar -xf /tmp/installer.tar -C /opt && chown -R vunet:vunet /opt"
 
-    - name: Change directory to ./healthbeat
-      become: yes
-      become_user: vunet
-      shell: "cd /opt/healthbeat_linux_64_install"
-
-    - name: Run the install script
-      become: yes
-      become_user: vunet
-      shell: "bash ./install --quick --setupinit"
-
+    - name: Change directory to ./healthbeat and run the install script
+      shell: "cd /opt/healthbeat_linux_64_install && ./install --quick --setupinit"
