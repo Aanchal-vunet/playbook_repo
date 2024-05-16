@@ -22,7 +22,7 @@
     - name: Change directory to ./healthbeat
       become: yes
       become_user: vunet
-      shell: "cd /home/vunet/healthbeat"
+      shell: "cd /home/vunet/healthbeat_install"
 
     - name: Run the install script
       become: yes
