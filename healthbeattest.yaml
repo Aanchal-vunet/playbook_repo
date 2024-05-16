@@ -11,36 +11,18 @@
         dest: "/tmp/installer.tar"
         remote_src: yes
 
-    - name: Set permissions for installer tar file
-      become: yes
-      file:
-        path: "/tmp/installer.tar"
-        mode: "0644"
-        owner: vunet
-        group: vunet
-
-    - name: Set permissions for /opt directory
-      become: yes
-      become_user: vunet
-      file:
-        path: "/opt"
-        state: directory
-        mode: "0755"
-        owner: vunet
-        group: vunet
-
     - name: Extract installer tar on /opt
       become: yes
       become_user: vunet
       unarchive:
         src: "/tmp/installer.tar"
-        dest: "/opt"
+        dest: "/home/vunet/"
         remote_src: yes
 
     - name: Change directory to ./healthbeat
       become: yes
       become_user: vunet
-      shell: "cd /opt/healthbeat"
+      shell: "cd /home/vunet/healthbeat"
 
     - name: Run the install script
       become: yes
