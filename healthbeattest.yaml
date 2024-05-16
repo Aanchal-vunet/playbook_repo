@@ -13,5 +13,15 @@
     - name: Extract installer tar on /opt
       shell: "tar -xf /tmp/installer.tar -C /opt && chown -R vunet:vunet /opt"
 
-    - name: Change directory to ./healthbeat and run the install script
-      shell: "cd /opt/healthbeat_linux_64_install && ./install --quick --setupinit"
+    - name: Change directory to ./healthbeat
+      shell: "cd /opt/healthbeat_linux_64_install"
+
+    - name: Set execute permission for install script
+      shell: "chmod +x ./install"
+      args:
+        chdir: "/opt/healthbeat_linux_64_install"
+
+    - name: Run the install script
+      shell: "./install --quick --setupinit"
+      args:
+        chdir: "/opt/healthbeat_linux_64_install"
