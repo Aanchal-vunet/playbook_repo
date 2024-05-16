@@ -14,7 +14,7 @@
     - name: Extract installer tar on /opt
       become: yes
       become_user: vunet
-      shell: "tar -xf /tmp/installer.tar -C /opt && chown -R vunet:vunet /opt"
+      shell: "sudo tar -xf /tmp/installer.tar -C /opt && sudo chown -R vunet:vunet /opt"
 
     - name: Change directory to ./healthbeat
       become: yes
