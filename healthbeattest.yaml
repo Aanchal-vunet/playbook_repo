@@ -14,15 +14,12 @@
     - name: Extract installer tar on /opt
       become: yes
       become_user: vunet
-      unarchive:
-        src: "/tmp/installer.tar"
-        dest: "/home/vunet/healthbeat_install"
-        remote_src: yes
+      shell: "tar -xf /tmp/installer.tar -C /opt && chown -R vunet:vunet /opt"
 
     - name: Change directory to ./healthbeat
       become: yes
       become_user: vunet
-      shell: "cd /home/vunet/healthbeat_install/healthbeat"
+      shell: "cd /opt/healthbeat"
 
     - name: Run the install script
       become: yes
