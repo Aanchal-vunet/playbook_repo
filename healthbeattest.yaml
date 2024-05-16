@@ -12,6 +12,7 @@
         remote_src: yes
 
     - name: Set permissions for installer tar file
+      become: yes
       file:
         path: "/tmp/installer.tar"
         mode: "0644"
@@ -19,6 +20,8 @@
         group: vunet
 
     - name: Set permissions for /opt directory
+      become: yes
+      become_user: vunet
       file:
         path: "/opt"
         state: directory
@@ -27,6 +30,8 @@
         group: vunet
 
     - name: Extract installer tar on /opt
+      become: yes
+      become_user: vunet
       unarchive:
         src: "/tmp/installer.tar"
         dest: "/opt"
