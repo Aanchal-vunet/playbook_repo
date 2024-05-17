@@ -2,7 +2,7 @@
 - name: Install Healthbeat on Ubuntu servers
   hosts: all
   become: yes
-  become_user: {{ user }}
+  become_user: "{{ user }}"
   tasks:
     - name: Transfer installer tar file to /tmp
       copy:
