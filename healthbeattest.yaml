@@ -8,7 +8,6 @@
       copy:
         src: "{{ tarfile_path }}"
         dest: "{{ installer_path }}"
-        remote_src: yes
 
     - name: Extract installer tar on /opt
       shell: "tar -xf {{installer_path}} -C {{path}} && chown -R vunet:vunet {{path}}"
