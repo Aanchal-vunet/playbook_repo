@@ -4,9 +4,9 @@
   become: yes
   become_user: vunet
   tasks:
-  - name: Debug directory contents
-    debug:
-      msg: "{{ lookup('fileglob', '/home/vunet/*') }}"
+    - name: Debug directory contents
+      debug:
+        msg: "{{ lookup('fileglob', '/home/vunet/*') }}"
       
     - name: Ensure /opt directory exists
       file:
