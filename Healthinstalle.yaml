@@ -17,17 +17,17 @@
         mode: '0644'
       delegate_to: localhost
 
-    - name: Debugging: Print current user
+    - name: Debugging Print current user
       ansible.builtin.debug:
         msg: "Current user is {{ ansible_user }}"
 
-    - name: Debugging: Print current effective user
+    - name: Debugging Print current effective user
       ansible.builtin.command: whoami
       register: result_whoami
       changed_when: false
       ignore_errors: true
 
-    - name: Debugging: Print result of whoami command
+    - name: Debugging  Print result of whoami command
       ansible.builtin.debug:
         var: result_whoami.stdout
 
