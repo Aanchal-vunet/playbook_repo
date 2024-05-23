@@ -10,12 +10,23 @@
         state: directory
         mode: '0755'
     
-    - name: Synchronize file from Ansible control node to remote hosts
-      synchronize:
+    - name: Create temporary directory on Ansible control node
+      ansible.builtin.file:
+        path: "/tmp/ansible_temp"
+        state: directory
+
+    - name: Copy file to temporary directory on Ansible control node
+      ansible.builtin.copy:
         src: "/home/vunet/lhealthbeat_linux_64.zip"
-        dest: "/tmp/lhealthbeat_linux_64.zip"
+        dest: "/tmp/ansible_temp/lhealthbeat_linux_64.zip"
+
+    - name: Synchronize file from temporary directory to /tmp on remote hosts
+      synchronize:
+        src: "/tmp/ansible_temp/"
+        dest: "/tmp/"
         mode: pull
       delegate_to: localhost
+
 
     - name: Extract installer tar file to /opt
       unarchive:
