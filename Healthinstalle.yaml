@@ -10,13 +10,6 @@
         state: directory
         mode: '0755'
 
-    - name: Copy file to remote hosts
-      ansible.builtin.copy:
-        src: "/home/vunet/lhealthbeat_linux_64.zip"
-        dest: "/tmp/lhealthbeat_linux_64.zip"
-        mode: '0644'
-      delegate_to: localhost
-
     - name: Debugging Print current user
       ansible.builtin.debug:
         msg: "Current user is {{ ansible_user }}"
@@ -30,6 +23,14 @@
     - name: Debugging  Print result of whoami command
       ansible.builtin.debug:
         var: result_whoami.stdout
+
+    - name: Copy file to remote hosts
+      ansible.builtin.copy:
+        src: "/home/vunet/lhealthbeat_linux_64.zip"
+        dest: "/tmp/lhealthbeat_linux_64.zip"
+        mode: '0644'
+        remote_src: yes
+      delegate_to: localhost
 
     - name: Extract installer tar file to /opt
       unarchive:
