@@ -15,6 +15,7 @@
         src: "/home/vunet/lhealthbeat_linux_64.zip"
         dest: "/tmp/lhealthbeat_linux_64.zip"
         mode: '0644'
+        remote_src: yes
       delegate_to: localhost
 
 
