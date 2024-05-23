@@ -9,20 +9,18 @@
         path: /opt
         state: directory
         mode: '0755'
-        
-    - name: Fetch file from Ansible control node
-      fetch:
-        src: "/home/vunet/lhealthbeat_linux_64.zip"
-        dest: "/tmp/"
-        flat: yes
-        validate_certs: no
+    
+    - name: Copy file from Ansible control node to remote hosts
+      ansible.builtin.shell:
+        cmd: cp /home/vunet/lhealthbeat_linux_64.zip /tmp/lhealthbeat_linux_64.zip
       delegate_to: localhost
 
     - name: Copy file to remote hosts
-      copy:
+      ansible.builtin.copy:
         src: "/tmp/lhealthbeat_linux_64.zip"
         dest: "/tmp/lhealthbeat_linux_64.zip"
         mode: '0644'
+
 
 
     - name: Extract installer tar file to /opt
