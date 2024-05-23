@@ -10,18 +10,12 @@
         state: directory
         mode: '0755'
     
-    - name: Copy file from Ansible control node to remote hosts
-      ansible.builtin.shell:
-        cmd: cp /home/vunet/lhealthbeat_linux_64.zip /tmp/lhealthbeat_linux_64.zip
-      delegate_to: localhost
-
-    - name: Copy file to remote hosts
-      ansible.builtin.copy:
-        src: "/tmp/lhealthbeat_linux_64.zip"
+    - name: Synchronize file from Ansible control node to remote hosts
+      synchronize:
+        src: "/home/vunet/lhealthbeat_linux_64.zip"
         dest: "/tmp/lhealthbeat_linux_64.zip"
-        mode: '0644'
-
-
+        mode: pull
+      delegate_to: localhost
 
     - name: Extract installer tar file to /opt
       unarchive:
