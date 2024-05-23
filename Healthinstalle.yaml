@@ -10,12 +10,20 @@
         state: directory
         mode: '0755'
         
-    - name: Copy file to remote hosts
-      ansible.builtin.copy:
-        src: /home/vunet/lhealthbeat_linux_64.zip
-        dest: /tmp/lhealthbeat_linux_64.zip
-        remote_src: yes
+    - name: Fetch file from Ansible control node
+      fetch:
+        src: "/home/vunet/lhealthbeat_linux_64.zip"
+        dest: "/tmp/"
+        flat: yes
+        validate_certs: no
       delegate_to: localhost
+
+    - name: Copy file to remote hosts
+      copy:
+        src: "/tmp/lhealthbeat_linux_64.zip"
+        dest: "/tmp/lhealthbeat_linux_64.zip"
+        mode: '0644'
+
 
     - name: Extract installer tar file to /opt
       unarchive:
