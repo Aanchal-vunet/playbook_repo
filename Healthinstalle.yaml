@@ -4,10 +4,9 @@
   become: yes
   become_user: vunet
   tasks:
-    - name: Copy file to remote hosts
-      - copy:
-        src: "/home/vunet/lhealthbeat_linux_64.zip"
-        dest: "/tmp/lhealthbeat_linux_64.zip"
+    - copy:
+      src: "/home/vunet/lhealthbeat_linux_64.zip"
+      dest: "/tmp/lhealthbeat_linux_64.zip"
 
     - name: Ensure /opt directory exists
       file:
