@@ -9,12 +9,13 @@
         path: /opt
         state: directory
         mode: '0755'
-
-    - name: Transfer installer tar file to /tmp
-      copy:
-        src: /home/vunet/lhealthbeat_linux_64.zip  # Adjust the source path accordingly
+        
+    - name: Copy file to remote hosts
+      ansible.builtin.copy:
+        src: /home/vunet/lhealthbeat_linux_64.zip
         dest: /tmp/lhealthbeat_linux_64.zip
         mode: '0644'
+        remote_src: yes
 
     - name: Extract installer tar file to /opt
       unarchive:
