@@ -15,9 +15,21 @@
         src: "/home/vunet/lhealthbeat_linux_64.zip"
         dest: "/tmp/lhealthbeat_linux_64.zip"
         mode: '0644'
-        remote_src: yes
       delegate_to: localhost
 
+    - name: Debugging: Print current user
+      ansible.builtin.debug:
+        msg: "Current user is {{ ansible_user }}"
+
+    - name: Debugging: Print current effective user
+      ansible.builtin.command: whoami
+      register: result_whoami
+      changed_when: false
+      ignore_errors: true
+
+    - name: Debugging: Print result of whoami command
+      ansible.builtin.debug:
+        var: result_whoami.stdout
 
     - name: Extract installer tar file to /opt
       unarchive:
