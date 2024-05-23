@@ -2,7 +2,6 @@
 - name: Install Healthbeat on Linux servers
   hosts: all
   become: yes
-  become_user: vunet
   become_method: sudo
   tasks:
     - name: Copy file to remote hosts
