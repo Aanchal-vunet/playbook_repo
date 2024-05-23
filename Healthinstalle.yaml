@@ -5,7 +5,7 @@
   become_user: vunet
   tasks:
     - name: Copy file to remote hosts
-      ansible.builtin.copy:
+      - copy:
         src: "/home/vunet/lhealthbeat_linux_64.zip"
         dest: "/tmp/lhealthbeat_linux_64.zip"
 
