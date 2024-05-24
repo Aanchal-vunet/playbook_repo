@@ -2,6 +2,7 @@
 - name: Install Healthbeat on Ubuntu servers
   hosts: all
   become: yes
+  become_method: sudo
   become_user: "{{ user }}"
   tasks:
     - name: Transfer installer tar file to /tmp
@@ -9,18 +10,19 @@
         src: "{{ tarfile_path }}"
         dest: "{{ installer_path }}"
 
-    - name: Extract installer tar on /opt
-      shell: "unzip {{installer_path}} -d {{path}} && chown -R vunet:vunet {{path}}"
+    - name: Extract archive from /tmp to /opt
+      unarchive:
+        src: "{{ installer_path }}"
+        dest: "{{ path }}"
+        remote_src: yes
+        mode: "unzip"
 
-    - name: Change directory to ./healthbeat
-      shell: "cd {{path}}/lhealthbeat_linux_64"
-
-    - name: Set execute permission for install script
-      shell: "chmod +x ./install"
-      args:
-        chdir: "{{path}}/lhealthbeat_linux_64"
+    - name: Change permissions of a install file
+      file:
+        path: "{{ path }}/lhealthbeat_linux_64/install"
+        mode: '0755'
 
     - name: Run the install script
-      shell: "./install --quick --setupinit"
+      shell: "./install --quick --installpath {{ path }} --setupinit"
       args:
-        chdir: "{{path}}/lhealthbeat_linux_64"
+        chdir: "{{ path }}/lhealthbeat_linux_64"
