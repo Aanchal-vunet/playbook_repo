@@ -13,14 +13,14 @@
       shell: "tar -xf {{installer_path}} -C {{path}} && chown -R vunet:vunet {{path}}"
 
     - name: Change directory to ./healthbeat
-      shell: "cd {{path}}/healthbeat_linux_64_install"
+      shell: "cd {{path}}/lhealthbeat_linux_64"
 
     - name: Set execute permission for install script
       shell: "chmod +x ./install"
       args:
-        chdir: "{{path}}/healthbeat_linux_64_install"
+        chdir: "{{path}}/lhealthbeat_linux_64"
 
     - name: Run the install script
       shell: "./install --quick --setupinit"
       args:
-        chdir: "{{path}}/healthbeat_linux_64_install"
+        chdir: "{{path}}/lhealthbeat_linux_64"
