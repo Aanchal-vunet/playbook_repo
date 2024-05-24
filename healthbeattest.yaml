@@ -10,7 +10,7 @@
         dest: "{{ installer_path }}"
 
     - name: Extract installer tar on /opt
-      shell: "unzip {{installer_path}} -C {{path}} && chown -R vunet:vunet {{path}}"
+      shell: "unzip {{installer_path}} -d {{path}} && chown -R vunet:vunet {{path}}"
 
     - name: Change directory to ./healthbeat
       shell: "cd {{path}}/lhealthbeat_linux_64"
