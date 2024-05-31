@@ -19,10 +19,22 @@
 
     - name: Change permissions of a install file
       file:
-        path: "{{ path }}/lhealthbeat_linux_64/install"
+        path: "{{ path }}/healthbeat_linux_64/install"
         mode: '0755'
 
     - name: Run the install script
-      shell: "./install --quick --installpath {{ path }} --setupinit"
+      shell: "./install --quick --installpath {{ path }} --enablessl"
       args:
-        chdir: "{{ path }}/lhealthbeat_linux_64"
+        chdir: "{{ path }}/healthbeat_linux_64"
+
+    - name: Replace source_id to the current inventory host
+      replace:
+        path: "{{ path }}/healthbeat/etc/healthbeat/modules.d/linux.yml"
+        regexp: '{HOST}'
+        replace: "{{ ansible_host }}"
+
+    - name: Replace kafka broker to vusmartmaps broker host IP or a valid fqdn dns name
+      replace:
+        path: "{{ path }}/healthbeat/etc/healthbeat/healthbeat.yml"
+        regexp: 'localhost'
+        replace: "{{ vunet_collector }}"
